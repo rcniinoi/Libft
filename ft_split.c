@@ -6,7 +6,7 @@
 /*   By: rchiewli <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 19:27:35 by rchiewli          #+#    #+#             */
-/*   Updated: 2022/03/24 22:37:15 by rchiewli         ###   ########.fr       */
+/*   Updated: 2022/03/26 00:24:01 by rchiewli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static char	**ft_while(char **area, char *st, int cnt)
 	return (area);
 }
 
-char	**ft_maltect(char *ns, char c)
+static char	**ft_maltect(char *ns, char c)
 {
 	char	**area;
 
@@ -98,17 +98,35 @@ char	**ft_split(char const *s, char c)
 	int		cnt;
 
 	i = 0;
+	if (!s)
+		return (NULL);
 	ns = ft_strtrim(s, &c);
 	area = ft_maltect(ns, c);
 	st = ns;
-	cnt = ft_strcnt(ns, c);
-	ft_zero(ns, c);
+	cnt = ft_strcnt(st, c);
+	ft_zero(st, c);
 	area = ft_while(area, st, cnt);
 	free(ns);
 	return (area);
 }
 
-/*int main()
+/*int	main(void)
+{
+	char **test;
+	char **test1;
+	int	i;
+
+	test = ft_split("      split       this for   me  !      ", ' ');
+	test1 = ((char*[6]){"split", "this", "for", "me", "!", NULL});
+	i = 0;
+	while (test[i])
+	{
+		printf("%d:\n test: %sa\n test1: %sb\n", i, test[i], test1[i]);
+		i++;
+	}
+	printf("%d:\n test: %sa\n test1: %sb\n", i, test[i], test1[i]);
+}
+int main()
 {
 	int	i;
 	int	j;
